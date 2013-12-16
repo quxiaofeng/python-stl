@@ -1,0 +1,19 @@
+## VCG lib svn info
++ Revision 4939
++ https://svn.code.sf.net/p/vcg/code/
+
+## vcglib from svn to git
+
++ svn checkout svn://svn.code.sf.net/p/vcg/code/trunk/vcglib vcglib
+
++ git svn clone -r4939 svn://svn.code.sf.net/p/vcg/code/trunk/vcglib
+
+## meshlab from svn to git
+
++ https://svn.code.sf.net/p/meshlab/code/
+
++ Revision 6172
+
++ svn checkout svn://svn.code.sf.net/p/meshlab/code/trunk/meshlab
+
++ git svn clone -r6172 svn://svn.code.sf.net/p/meshlab/code/trunk/meshlab

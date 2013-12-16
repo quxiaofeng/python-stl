@@ -155,6 +155,8 @@ class draw_scene:
     else:
       self.model1.load_stl(sys.argv[1])
     self.init_shading()
+    self.x=-20
+    self.y=-20
 
 
   #solid model with a light / shading
@@ -179,8 +181,8 @@ class draw_scene:
     glViewport(0, 0, width, height)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
-    gluPerspective(45, 1.0*width/height, 0.1, 100.0)
-    #gluLookAt(0.0,0.0,45.0,0,0,0,0,40.0,0)
+    gluPerspective(45, 1.0*width/height, 1,100.0)
+    gluLookAt(self.x, self.y, 0.0, 0, 0, 0, 0, 0.0, 40.0)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
 
@@ -203,12 +205,31 @@ class draw_scene:
 
     glMatrixMode(GL_MODELVIEW)
 
-  def draw(self):
+  def draw(self):    
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
+    gluLookAt(self.x, self.y, 0.0, 0, 0, 0, 0, 0.0, 40.0)
 
-    glTranslatef(0.0,-26.0, -100.0)
+    #glTranslatef(0.0,-26.0, -100.0)
     self.model1.draw()
+
+  def event_handle(self,event):
+    if event.type == pygame.KEYDOWN:
+        key = pygame.key.get_pressed()
+        # vertical
+        if key[pygame.K_w]:
+            self.y += 20.0;
+            print "self.y = %d" % self.y
+        if key[pygame.K_s]:
+            self.y -= 20.0;
+            print "self.y = %d" % self.y
+        # horizontal
+        if key[pygame.K_d]:
+            self.x += 20.0
+            print "self.x = %d" % self.x
+        if key[pygame.K_a]:
+            self.x -= 20.0
+            print "self.x = %d" % self.x
 
 #main program loop
 def main():
@@ -226,6 +247,8 @@ def main():
     event = pygame.event.poll()
     if event.type == QUIT or (event.type == KEYDOWN and event.key == K_ESCAPE):
       break
+    else:
+      scene.event_handle(event)
 
     #draw the scene
     scene.draw()
