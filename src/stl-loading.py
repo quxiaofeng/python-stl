@@ -71,7 +71,7 @@ class loader:
     type=h[0:5]
     fp.close()
 
-    if type=='solid':
+    if type.decode('ascii')=='solid':
       print "reading text file "+str(filename)
       self.load_text_stl(filename)
     else:
